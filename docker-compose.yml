@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api:
+    image: cleasol/demo
+    container_name: cleasol
+    environment:
+      MONGO_HOST: mongo
+    links:
+        - mongo
+    expose:
+      - 8080
+    ports:
+      - "0.0.0.0:8080:8080"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    expose:
+      - 27017
+    ports:
+      - "0.0.0.0:27017:27017"
